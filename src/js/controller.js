@@ -5,11 +5,11 @@ import * as model from './model.js';
 import recipeView from './views/recipeView.js';
 import searchView from './views/searchView.js';
 import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
 ///////////////////////////////////////
-if (module.hot) module.hot.accept();
 
 async function showRecipe() {
   try {
@@ -42,7 +42,10 @@ async function showSearchResults() {
     await model.loadSearchResults(query);
 
     // Display the search results
-    resultsView.render(model.state.searchResults.results);
+    resultsView.render(model.getSearchResultsPage(1));
+
+    // Render pagination buttons
+    paginationView.render(model.state.searchResults);
   } catch (err) {
     console.log(err);
   }

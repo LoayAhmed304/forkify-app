@@ -1,4 +1,3 @@
-import icons from 'url:../../img/icons.svg';
 import View from './view.js';
 
 class ResultsView extends View {
@@ -7,6 +6,7 @@ class ResultsView extends View {
   _successMessage = '';
 
   _generateMarkup() {
+    console.log(this._data);
     return this._data.map(el => this._generateMarkupPreview(el)).join('');
   }
 
