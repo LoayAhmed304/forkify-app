@@ -34,7 +34,7 @@ export default class View {
                 <use href="${icons}#icon-alert-triangle"></use>
               </svg>
             </div>
-            <p>${this._errorMessage}!</p>
+            <p>${this._errorMessage}</p>
           </div>`;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);

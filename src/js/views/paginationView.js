@@ -4,52 +4,65 @@ import View from './view.js';
 class PaginationView extends View {
   _parentElement = document.querySelector('.pagination');
 
+  addHandlerClick(control) {
+    this._parentElement.addEventListener('click', function (e) {
+      const button = e.target.closest('.btn--inline');
+      if (!button) return;
+
+      const gotoPage = +button.dataset.goto;
+
+      control(gotoPage);
+    });
+  }
   _generateMarkup() {
+    const curPage = this._data.page;
     const pagesNumber = Math.ceil(
       this._data.results.length / this._data.resultsPerPage
     );
-    console.log(pagesNumber);
 
     // Page 1 and there are other pages
-    if (this._data.page === 1 && pagesNumber > 1) {
+    if (curPage === 1 && pagesNumber > 1) {
+      return this._nextPageMarkup(curPage);
+    }
+
+    // Last page
+    if (curPage === pagesNumber && pagesNumber > 1) {
+      return this._previousPageMarkup(curPage);
+    }
+    // Other page
+    if (curPage < pagesNumber) {
       return `
-        <button class="btn--inline pagination__btn--next">
-            <span>Page ${this._data.page + 1}</span>
+        ${this._previousPageMarkup(curPage)}
+        ${this._nextPageMarkup(curPage)}
+          `;
+    }
+    // Page 1 and there are no other pages
+    return '';
+  }
+
+  _previousPageMarkup(page) {
+    return `
+        <button data-goto ="${
+          page - 1
+        }" class="btn--inline pagination__btn--prev">
+            <svg class="search__icon">
+              <use href="${icons}#icon-arrow-left"></use>
+            </svg>
+            <span>Page ${page - 1}</span>
+        </button>`;
+  }
+
+  _nextPageMarkup(page) {
+    return `
+        <button data-goto ="${
+          page + 1
+        }" class="btn--inline pagination__btn--next">
+            <span>Page ${page + 1}</span>
             <svg class="search__icon">
               <use href="${icons}#icon-arrow-right"></use>
             </svg>
         </button>
         `;
-    }
-
-    // Last page
-    if (this._data.page === pagesNumber && pagesNumber > 1) {
-      return `<button class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-              <use href="${icons}#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${this._data.page - 1}</span>
-          </button>`;
-    }
-    // Other page
-    if (this._data.page < pagesNumber) {
-      return `
-        <button class="btn--inline pagination__btn--prev">
-            <svg class="search__icon">
-              <use href="${icons}#icon-arrow-left"></use>
-            </svg>
-            <span>Page ${this._data.page - 1}</span>
-        </button>
-        <button class="btn--inline pagination__btn--next">
-            <span>Page ${this._data.page + 1}</span>
-            <svg class="search__icon">
-              <use href="${icons}#icon-arrow-right"></use>
-            </svg>
-        </button>
-          `;
-    }
-    // Page 1 and there are no other pages
-    return '';
   }
 }
 
