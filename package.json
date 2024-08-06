@@ -1,0 +1,27 @@
+{
+  "name": "forkify-app",
+  "version": "1.0.0",
+  "description": "Recipe application",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LoayAhmed304/forkify-app.git"
+  },
+  "author": "Loay Ahmed",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LoayAhmed304/forkify-app/issues"
+  },
+  "homepage": "https://github.com/LoayAhmed304/forkify-app#readme",
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.12.0",
+    "parcel": "^2.12.0"
+  },
+  "dependencies": {
+    "fractional": "^1.0.0"
+  }
+}
