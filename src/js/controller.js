@@ -2,30 +2,55 @@ import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import * as model from './model.js';
-import view from './views/recipeView.js';
 import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
 
 const recipeContainer = document.querySelector('.recipe');
 
 ///////////////////////////////////////
+if (module.hot) module.hot.accept();
 
 async function showRecipe() {
   try {
+    // Get the recipe hash
     const hash = document.location.hash.slice(1);
-    if (!hash) return;
+
+    if (!hash) return; // Fresh page
 
     // 1) Loading recipe
-    view.renderSpinner();
+    recipeView.renderSpinner();
     await model.loadRecipe(hash);
 
     // 2) Rendering recipe
-    view.render(model.state.recipe);
+    recipeView.render(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
   }
 }
+
+async function showSearchResults() {
+  try {
+    // Get the search value
+    const query = searchView.getQuery();
+
+    if (!query) return; // Empty search value
+
+    resultsView.renderSpinner();
+
+    // Update the state object
+    await model.loadSearchResults(query);
+
+    // Display the search results
+    resultsView.render(model.state.searchResults.results);
+  } catch (err) {
+    console.log(err);
+  }
+}
+
 function init() {
   recipeView.addHandlerRender(showRecipe);
+  searchView.addHandlerSearch(showSearchResults);
 }
 
 init();
