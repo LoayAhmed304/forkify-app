@@ -17,9 +17,12 @@ async function showRecipe() {
     const hash = document.location.hash.slice(1);
 
     if (!hash) return; // Fresh page
+    recipeView.renderSpinner();
+
+    // 0) Update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
 
     // 1) Loading recipe
-    recipeView.renderSpinner();
     await model.loadRecipe(hash);
 
     // 2) Rendering recipe
@@ -64,7 +67,8 @@ function controlServings(newServings) {
   model.updateServings(newServings);
 
   // Update the view
-  recipeView.render(model.state.recipe);
+  // recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 }
 
 function init() {
