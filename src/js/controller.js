@@ -74,7 +74,7 @@ function controlServings(newServings) {
 }
 
 function controlAddBookmark() {
-  // 1) Add or remove bookmar
+  // 1) Add or remove bookmark
   if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
   else model.deleteBookmark(model.state.recipe.id);
 
@@ -85,7 +85,12 @@ function controlAddBookmark() {
   bookmarksView.render(model.state.bookmarks);
 }
 
+function controlBookmarks() {
+  bookmarksView.render(model.state.bookmarks);
+}
+
 function init() {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(showRecipe);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerBookmark(controlAddBookmark);
