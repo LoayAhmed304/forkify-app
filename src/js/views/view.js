@@ -55,7 +55,7 @@ export default class View {
     this._parentElement.innerHTML = '';
   }
 
-  renderError() {
+  renderError(errorMsg = this._errorMessage) {
     const markup = `
           <div class="error">
             <div>
@@ -63,8 +63,21 @@ export default class View {
                 <use href="${icons}#icon-alert-triangle"></use>
               </svg>
             </div>
-            <p>${this._errorMessage}</p>
+            <p>${errorMsg}</p>
           </div>`;
+    this._clear();
+    this._parentElement.insertAdjacentHTML('afterbegin', markup);
+  }
+  renderMessage(msg = this._message) {
+    const markup = `
+        <div class="message">
+          <div>
+            <svg>
+              <use href="${icons}#icon-smile"></use>
+            </svg>
+          </div>
+          <p>${msg}</p>
+        </div>`;
     this._clear();
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
