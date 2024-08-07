@@ -44,6 +44,7 @@ export async function loadSearchResults(query) {
         publisher: rec.publisher,
       };
     });
+    state.searchResults.page = 1;
   } catch (err) {
     console.log(err);
     throw err;
