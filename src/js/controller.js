@@ -1,4 +1,3 @@
-import icons from 'url:../img/icons.svg';
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import * as model from './model.js';
