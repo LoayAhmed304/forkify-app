@@ -64,7 +64,7 @@ Whether you’re a budding chef or just someone looking to expand your culinary 
 If you have suggestions or would like to contribute to the project, feel free to fork the repository and submit a pull request.
 
 ## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the MIT License - see the [LICENSE](License) file for details.
 
 ## 🙏 Acknowledgements
 - [Jonas Schmedtmann](https://x.com/jonasschmedtman) for the incredible JavaScript course on Udemy and providing the HTML & CSS base code.
